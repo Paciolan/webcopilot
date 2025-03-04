@@ -1,0 +1,8 @@
+src/
+tests/
+.github/
+.vscode/
+scripts/
+config/local.yml
+tsconfig.json
+.webpilot_config.yml 

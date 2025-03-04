@@ -1,0 +1,9 @@
+node_modules
+snapshots
+dist
+*.zip
+config/local.yml
+llm_cache
+mock_ai_res
+.vscode
+scripts/
