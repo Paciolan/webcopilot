@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import puppeteer from 'puppeteer';
+import puppeteerExtra from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import config from 'config';
 import { Command } from 'commander';
 import fs from 'fs';
@@ -16,6 +18,9 @@ const defaultConfigDir = path.join(__dirname, "..", "config");
 if (!process.env["NODE_CONFIG_DIR"].includes(defaultConfigDir)) {
   process.env["NODE_CONFIG_DIR"] += path.delimiter + defaultConfigDir;
 }
+
+// Add this after the imports
+puppeteerExtra.use(StealthPlugin());
 
 const launchBrowser = async () => {
   try {
@@ -100,8 +105,8 @@ const launchBrowser = async () => {
       }
     }
     
-    const browser = await puppeteer.launch(launchOptions);
-    Logger.info('Browser launched!');
+    const browser = await puppeteerExtra.launch(launchOptions);
+    Logger.info('Browser launched with stealth mode!');
 
     // Open a new page
     const page = await browser.newPage();
