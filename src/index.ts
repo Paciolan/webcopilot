@@ -44,8 +44,21 @@ const launchBrowser = async () => {
     const behavior = config.get<{ headless: boolean; useChrome: boolean }>('behavior');
     const claude = config.get<{ apiKey: string }>('claude');
 
+    // Check for Claude API key in command line options
     if (options.key) {
       claude.apiKey = options.key;
+    }
+
+    // Check for Claude API key in environment variables
+    if (process.env.ANTHROPIC_API_KEY) {
+      claude.apiKey = process.env.ANTHROPIC_API_KEY;
+    }
+
+    // log the last 4 characters of the api key
+    if (claude.apiKey && claude.apiKey.length >= 4) {
+      Logger.log(`Claude API key: ****${claude.apiKey.slice(-4)}`);
+    } else {
+      Logger.log('Claude API key: not set or invalid');
     }
 
     // Modify config loading to look for .webpilot_config.yml
