@@ -18,6 +18,49 @@ Or run it directly using npx:
 npx webpilot -s your-script.txt
 ```
 
+## Script Format
+
+WebPilot uses simple text files containing natural language instructions to automate web interactions. Each line in the script represents a single action to be performed.
+
+### Creating Scripts
+
+Create a `.txt` file containing your automation steps. Each line should describe one action in natural language. For example:
+
+```txt
+navigate to https://example.com
+type "search term" into the search box
+click the "Submit" button
+I should see the search results page
+```
+
+### Supported Actions
+
+WebPilot currently supports the following types of actions:
+
+- **Navigate**: Go to a specific URL
+  - Example: `navigate to https://example.com`
+
+- **Type**: Enter text into form fields
+  - Example: `type "Hello World" into the input field`
+
+- **Click**: Click on elements
+  - Example: `click the Submit button`
+
+- **Expect**: Verify elements or content is present
+  - Example: `I should see the login form`
+
+### Example Script
+
+Here's a complete example script that searches UCI's website:
+
+```txt
+navigate to https://uci.edu
+type "Computer Science" into the search bar on the top right
+click the "web" button
+click the title of the first item in the search results
+I should see the Department of Computer Science home page
+```
+
 ## Usage
 
 ### Command Line Arguments
