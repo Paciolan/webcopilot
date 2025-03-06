@@ -19,6 +19,11 @@ if (!process.env["NODE_CONFIG_DIR"].includes(defaultConfigDir)) {
   process.env["NODE_CONFIG_DIR"] += path.delimiter + defaultConfigDir;
 }
 
+// Get viewport settings from config
+const viewport = config.get<{ width: number; height: number }>('viewport');
+const behavior = config.get<{ headless: boolean; useChrome: boolean; keepAlive: boolean }>('behavior');
+const claude = config.get<{ apiKey: string }>('claude');
+
 // Add this after the imports
 puppeteerExtra.use(StealthPlugin());
 
@@ -31,6 +36,7 @@ const launchBrowser = async () => {
       .option('-h, --headless', 'Run in headless mode')
       .option('-c, --chrome', 'Use system installed Chrome')
       .option('-k, --key <key>', 'Override default API key')
+      .option('-a, --alive', 'Keep the browser alive after script execution')
       .parse(process.argv);
 
     const options = program.opts();
@@ -44,10 +50,6 @@ const launchBrowser = async () => {
     // Read the script file
     const script = fs.readFileSync(options.script, 'utf8');
     const scriptLines = script.split('\n');
-    // Get viewport settings from config
-    const viewport = config.get<{ width: number; height: number }>('viewport');
-    const behavior = config.get<{ headless: boolean; useChrome: boolean }>('behavior');
-    const claude = config.get<{ apiKey: string }>('claude');
 
     // Check for Claude API key in command line options
     if (options.key) {
@@ -57,6 +59,11 @@ const launchBrowser = async () => {
     // Check for Claude API key in environment variables
     if (process.env.ANTHROPIC_API_KEY) {
       claude.apiKey = process.env.ANTHROPIC_API_KEY;
+    }
+
+    // Check for keepAlive in command line options
+    if (options.alive) {
+      behavior.keepAlive = true;
     }
 
     // log the last 4 characters of the api key
@@ -149,9 +156,24 @@ const launchBrowser = async () => {
     // await browser.close();
     // console.log('Browser closed.');
     Logger.log('Script execution completed!');
+
+    if (!behavior.keepAlive) {
+      // wait for 5 seconds before closing the browser
+      await new Promise(resolve => setTimeout(resolve, 5000));
+
+      // close the browser
+      await browser.close();
+      Logger.log('Browser closed.');
+    }
   } catch (error) {
     Logger.error(`Error: ${error}`);
     Logger.error(error instanceof Error ? error.stack || '' : '');
+
+    if (!behavior.keepAlive) {
+      // wait for 5 seconds before force exiting
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      process.exit(1); // Exit with error code 1, a common convention for errors
+    }
   }
 };
 

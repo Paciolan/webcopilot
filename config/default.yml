@@ -1,6 +1,7 @@
 behavior:
   headless: false
   useChrome: false
+  keepAlive: false
 viewport:
   width: 1024
   height: 1024 
