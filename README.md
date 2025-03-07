@@ -161,16 +161,6 @@ webpilot/
 
 Contributions are welcome! Please feel free to submit a pull request.
 
-## Roadmap
-
-The following features and improvements are planned for future releases:
-
-- **GitHub Actions (CI/CD)**: Automated build and testing pipeline; Automated release creation.
-- **Enhanced Memory System**: Persistent conversation memory across sessions; Context-aware responses based on chat history.
-- **Advanced Image Capabilities**: Support for multiple image inputs in a single prompt.
-- **Chat History Management**: Searchable conversation history; Export/import conversation logs.
-- **Advanced Clipboard Integration**: Auto-copy selected text before launching; Smart paste detection and formatting; Clipboard history integration.
-
 ## License
 
 This project is open-sourced under the MIT License - see the LICENSE file for details.
