@@ -1,10 +1,10 @@
 {
-  "name": "webpilot",
+  "name": "webcopilot",
   "version": "0.1.0",
   "description": "A multimodal LLM-based AI web automation agent powered by Puppeteer",
   "main": "dist/index.js",
   "bin": {
-    "webpilot": "dist/index.js"
+    "webcopilot": "dist/index.js"
   },
   "files": [
     "dist",
@@ -19,7 +19,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/marked-terminal": "^6.1.1",
     "@types/puppeteer": "^7.0.4",

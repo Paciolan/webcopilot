@@ -13,7 +13,7 @@ import path from 'path';
 
 // Add this before loading config
 process.env["ALLOW_CONFIG_MUTATIONS"] = "true";
-process.env["NODE_CONFIG_DIR"] = path.join(process.cwd(), ".webpilot");
+process.env["NODE_CONFIG_DIR"] = path.join(process.cwd(), ".webcopilot");
 const defaultConfigDir = path.join(__dirname, "..", "config");
 if (!process.env["NODE_CONFIG_DIR"].includes(defaultConfigDir)) {
   process.env["NODE_CONFIG_DIR"] += path.delimiter + defaultConfigDir;
@@ -73,8 +73,8 @@ const launchBrowser = async () => {
       Logger.log('Claude API key: not set or invalid');
     }
 
-    // Modify config loading to look for .webpilot_config.yml
-    const userConfig = path.join(process.cwd(), '.webpilot_config.yml');
+    // Modify config loading to look for .webcopilot_config.yml
+    const userConfig = path.join(process.cwd(), '.webcopilot_config.yml');
     if (fs.existsSync(userConfig)) {
       // Config module will automatically merge this with default config
       process.env["NODE_CONFIG_DIR"] = path.dirname(userConfig);

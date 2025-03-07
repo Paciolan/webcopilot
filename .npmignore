@@ -6,7 +6,7 @@ config/local.yml
 node_modules
 snapshots
 tsconfig.json
-.webpilot_config.yml 
+.webcopilot_config.yml 
 llm_cache
 *.zip
 mock_ai_res

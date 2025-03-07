@@ -1,26 +1,26 @@
-# WebPilot
+# WebCopilot
 
 ## Introduction
 
-WebPilot is a multimodal LLM-based AI web automation agent powered by Puppeteer. It combines the power of large language models with browser automation to create intelligent, adaptable web automation scripts. By leveraging visual and textual understanding, WebPilot can interpret web pages and perform actions more reliably than traditional selector-based automation tools.
+WebCopilot is a multimodal LLM-based AI web automation agent powered by Puppeteer. It combines the power of large language models with browser automation to create intelligent, adaptable web automation scripts. By leveraging visual and textual understanding, WebCopilot can interpret web pages and perform actions more reliably than traditional selector-based automation tools.
 
 ## Installation
 
-You can install WebPilot globally using npm:
+You can install WebCopilot globally using npm:
 
 ```bash
-npm install -g webpilot
+npm install -g webcopilot
 ```
 
 Or run it directly using npx:
 
 ```bash
-npx webpilot -s your-script.txt
+npx webcopilot -s your-script.txt
 ```
 
 ## Script Format
 
-WebPilot uses simple text files containing natural language instructions to automate web interactions. Each line in the script represents a single action to be performed.
+WebCopilot uses simple text files containing natural language instructions to automate web interactions. Each line in the script represents a single action to be performed.
 
 ### Creating Scripts
 
@@ -35,7 +35,7 @@ I should see the search results page
 
 ### Supported Actions
 
-WebPilot currently supports the following types of actions:
+WebCopilot currently supports the following types of actions:
 
 - **Navigate**: Go to a specific URL
   - Example: `navigate to https://example.com`
@@ -66,7 +66,7 @@ I should see the Department of Computer Science home page
 ### Command Line Arguments
 
 ```bash
-npx webpilot [options]
+npx webcopilot [options]
 
 Options:
 -s, --script <path> Path to script file (required)
@@ -77,7 +77,7 @@ Options:
 
 ### Configuration
 
-You can override default configurations by creating a `.webpilot_config.yml` file in your project directory. Below are the available configuration options:
+You can override default configurations by creating a `.webcopilot_config.yml` file in your project directory. Below are the available configuration options:
 
 ```yaml
 behavior:
@@ -109,7 +109,7 @@ claude:
     presencePenalty: 0 # Presence penalty for token generation
 ```
 
-Create a `.webpilot_config.yml` file in your project directory with any of the above settings to override the defaults. For example:
+Create a `.webcopilot_config.yml` file in your project directory with any of the above settings to override the defaults. For example:
 
 ```yaml
 behavior:
@@ -127,29 +127,29 @@ You can test the package locally before publishing to NPM using two approaches:
 
 #### 1. Using npm link (Recommended)
 ```bash
-# In your webpilot project directory
+# In your webcopilot project directory
 npm run build       # Build the TypeScript files
 npm link            # Create a global link
 
-# Now you can use npx webpilot from anywhere
-npx webpilot -s your-script.txt
+# Now you can use npx webcopilot from anywhere
+npx webcopilot -s your-script.txt
 ```
 
 #### 2. Using the full path
 ```bash
-# In your webpilot project directory
+# In your webcopilot project directory
 npm run build        # Build the TypeScript files
 npx ./dist/index.js -s your-script.txt
 ```
 
 To unlink the package when you're done testing:
 ```bash
-npm unlink webpilot
+npm unlink webcopilot
 ```
 
 ### Project Structure
 ```
-webpilot/
+webcopilot/
 ├── src/             # Source files
 ├── dist/            # Compiled JavaScript files
 ├── config/          # Configuration files
