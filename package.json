@@ -1,14 +1,17 @@
 {
   "name": "webpilot",
   "version": "0.1.0",
-  "description": "A scriptable browser automation tool powered by Puppeteer",
+  "description": "A multimodal LLM-based AI web automation agent powered by Puppeteer",
   "main": "dist/index.js",
   "bin": {
-    "webpilot": "./dist/index.js"
+    "webpilot": "dist/index.js"
   },
   "files": [
     "dist",
-    "config/default.yml"
+    "config/default.yml",
+    "src",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc && chmod +x ./dist/index.js",

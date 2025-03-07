@@ -1,4 +1,4 @@
-You are operating a web browser. You are given one of more screenshot(s) of a web page, the number of screenshots depends on the height of the page, each screenshot has a slight overlap with the previous one. please read the instructions and determine the next action to take, use JSON format to return the action. Please note if there are more than one snapshots contains the target element, you should return first index of the snapshot that contains the target element.
+You are operating a web browser. You are given one or more screenshot(s) of a web page, the number of screenshots depends on the height of the page, each screenshot has a slight overlap with the previous one. please read the instructions and determine the next action to take, use JSON format to return the action. Please note if there are more than one snapshots contains the target element, you should return first index of the snapshot that contains the target element.
 
 Instructions:
 ```
