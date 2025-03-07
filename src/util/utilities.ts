@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import { Logger } from './logger';
 import { LLM } from './llm';
 import { Requests } from './requests';
+import path from 'path';
 
 /**
  * Generates a filename with timestamp for screenshots
@@ -445,7 +446,7 @@ export async function getLLMResponseWithCurrentPage(page: any, instruction: stri
     
     // Call Claude API with the image
     const promptContent = fs.readFileSync(
-        tagging ? './prompts/tag_and_determine_action.md' : './prompts/locate_and_determine_action.md', 
+        tagging ? path.join(__dirname, '../../prompts/tag_and_determine_action.md') : path.join(__dirname, '../../prompts/locate_and_determine_action.md'),
         'utf8'
     );
     const prompt = promptContent.replace(

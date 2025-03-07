@@ -1,23 +1,38 @@
 #!/usr/bin/env node
 
+import path from 'path';
+import fs from 'fs';
+import yaml from 'js-yaml';
+
+// Set the default config directory first
+process.env.NODE_CONFIG_DIR = path.resolve(__dirname, '../config');
+
+// Check for user config file in current working directory
+const userConfigPath = path.join(process.cwd(), '.webcopilot_config.yml');
+if (fs.existsSync(userConfigPath)) {
+  // Tell config module about the custom config file
+  // This uses the NODE_CONFIG environment variable to specify overrides
+  try {
+    const userConfigContent = fs.readFileSync(userConfigPath, 'utf8');
+    // Parse YAML to JS object, then stringify to JSON
+    const configObject = yaml.load(userConfigContent);
+    process.env.NODE_CONFIG = JSON.stringify(configObject);
+    console.log(`Loaded user configuration from ${userConfigPath}`);
+  } catch (error) {
+    console.error(`Error loading user configuration: ${error}`);
+  }
+}
+
+process.env["ALLOW_CONFIG_MUTATIONS"] = "true";
+
 import puppeteer from 'puppeteer';
 import puppeteerExtra from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import config from 'config';
 import { Command } from 'commander';
-import fs from 'fs';
 import { executeCommand } from './util/utilities';
 import { Logger } from './util/logger';
 import { Requests } from './util/requests';
-import path from 'path';
-
-// Add this before loading config
-process.env["ALLOW_CONFIG_MUTATIONS"] = "true";
-process.env["NODE_CONFIG_DIR"] = path.join(process.cwd(), ".webcopilot");
-const defaultConfigDir = path.join(__dirname, "..", "config");
-if (!process.env["NODE_CONFIG_DIR"].includes(defaultConfigDir)) {
-  process.env["NODE_CONFIG_DIR"] += path.delimiter + defaultConfigDir;
-}
 
 // Get viewport settings from config
 const viewport = config.get<{ width: number; height: number }>('viewport');
@@ -71,13 +86,6 @@ const launchBrowser = async () => {
       Logger.log(`Claude API key: ****${claude.apiKey.slice(-4)}`);
     } else {
       Logger.log('Claude API key: not set or invalid');
-    }
-
-    // Modify config loading to look for .webcopilot_config.yml
-    const userConfig = path.join(process.cwd(), '.webcopilot_config.yml');
-    if (fs.existsSync(userConfig)) {
-      // Config module will automatically merge this with default config
-      process.env["NODE_CONFIG_DIR"] = path.dirname(userConfig);
     }
 
     // Launch Chrome instead of Chromium
