@@ -52,6 +52,7 @@ const launchBrowser = async () => {
       .option('-c, --chrome', 'Use system installed Chrome')
       .option('-k, --key <key>', 'Override default API key')
       .option('-a, --alive', 'Keep the browser alive after script execution')
+      .option('-n, --nosandbox', 'Launch Chrome without sandbox')
       .parse(process.argv);
 
     const options = program.opts();
@@ -100,6 +101,11 @@ const launchBrowser = async () => {
         height: viewport.height,
         deviceScaleFactor: 1  // This disables retina/high-DPI scaling
       }
+    }
+
+    if (options.nosandbox) {
+      launchOptions.args.push('--no-sandbox');
+      launchOptions.args.push('--disable-setuid-sandbox');
     }
 
     if (options.chrome || behavior.useChrome) {
