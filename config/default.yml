@@ -15,7 +15,7 @@ retry:
   retryDelay: 5000
 llm:
   cache:
-    enabled: true
+    enabled: false
     path: "llm_cache"
 claude:
   apiKey: "your-api-key-here"

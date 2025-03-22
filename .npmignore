@@ -10,3 +10,4 @@ tsconfig.json
 llm_cache
 *.zip
 mock_ai_res
+presentations/

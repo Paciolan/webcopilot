@@ -18,6 +18,27 @@ Or run it directly using npx:
 npx webcopilot -s your-script.txt
 ```
 
+### API Key Setup
+
+WebCopilot requires a valid Anthropic API key to use the Claude LLM APIs. You can set up your API key using one of the following methods:
+
+1. **Environment Variable** (recommended): Set the `ANTHROPIC_API_KEY` environment variable:
+   ```bash
+   # For temporary use in current terminal session
+   export ANTHROPIC_API_KEY=your_api_key_here
+   
+   # For persistent use in macOS (add to your shell profile)
+   echo 'export ANTHROPIC_API_KEY=your_api_key_here' >> ~/.zshrc
+   source ~/.zshrc
+   ```
+
+2. **Command Line Argument**: Provide the key directly when running WebCopilot:
+   ```bash
+   npx webcopilot -s your-script.txt -k your_api_key_here
+   ```
+   
+3. **Configuration File**: Add your API key to the `.webcopilot_config.yml` file in your project directory (see the Configuration section below).
+
 ## Script Format
 
 WebCopilot uses simple text files containing natural language instructions to automate web interactions. Each line in the script represents a single action to be performed.
@@ -96,7 +117,7 @@ retry:
     retryDelay: 5000 # Delay between retries in milliseconds
 llm:
     cache:
-        enabled: true # Enable LLM response caching
+        enabled: false # Enable LLM response caching
         path: "llm_cache" # Path to cache directory
 claude:
     apiKey: "your-api-key-here" # Anthropic API key
@@ -118,6 +139,12 @@ behavior:
 ```
 
 This will run the browser in non-headless mode using system Chrome with a larger viewport.
+
+### Caching Considerations
+
+- Currently, the caching mechanism in WebCopilot only detects if the prompt is the same as previous calls. The attached snapshots are not being considered in the cache key.
+- If you are expecting the webpage to dynamically change between runs, please don't enable the caching feature as it may return stale responses.
+- We plan to implement image comparison for the caching feature in a future release.
 
 ## Development
 

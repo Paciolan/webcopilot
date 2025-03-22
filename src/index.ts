@@ -83,10 +83,10 @@ const launchBrowser = async () => {
     }
 
     // log the last 4 characters of the api key
-    if (claude.apiKey && claude.apiKey.length >= 4) {
+    if (claude.apiKey && claude.apiKey.length >= 4 && claude.apiKey !== 'your-api-key-here') {
       Logger.log(`Claude API key: ****${claude.apiKey.slice(-4)}`);
     } else {
-      Logger.log('Claude API key: not set or invalid');
+      throw new Error('Claude API key is not set or invalid');
     }
 
     // Launch Chrome instead of Chromium
