@@ -228,6 +228,7 @@ This project is open-sourced under the MIT License - see the LICENSE file for de
 - Xiaohan "Clement" Tian ([GitHub](https://github.com/Xiaohan-Tian), [ctian@paciolan.com](mailto:ctian@paciolan.com))
 - Leo Huang ([GitHub](https://github.com/LEOUS2013), [lhuang@paciolan.com](mailto:lhuang@paciolan.com))
 - Ada Lo ([alo@paciolan.com](mailto:alo@paciolan.com))
+- Tony Zhang ([tzhang@paciolan.com](mailto:tzhang@paciolan.com))
 - Joel Thoms ([GitHub](https://github.com/joelnet), [jthoms@paciolan.com](mailto:jthoms@paciolan.com))
 - Queensley Lim ([qmlim@uci.edu](mailto:qmlim@uci.edu))
 - Jenny Noh ([<eunseon@uci.edu>](mailto:eunseon@uci.edu))
