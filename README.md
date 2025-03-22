@@ -23,13 +23,43 @@ npx webcopilot -s your-script.txt
 WebCopilot requires a valid Anthropic API key to use the Claude LLM APIs. You can set up your API key using one of the following methods:
 
 1. **Environment Variable** (recommended): Set the `ANTHROPIC_API_KEY` environment variable:
+   
+   **For macOS:**
    ```bash
    # For temporary use in current terminal session
    export ANTHROPIC_API_KEY=your_api_key_here
    
-   # For persistent use in macOS (add to your shell profile)
+   # For persistent use (add to your shell profile)
    echo 'export ANTHROPIC_API_KEY=your_api_key_here' >> ~/.zshrc
    source ~/.zshrc
+   ```
+   
+   **For Linux:**
+   ```bash
+   # For temporary use in current terminal session
+   export ANTHROPIC_API_KEY=your_api_key_here
+   
+   # For persistent use (add to your shell profile)
+   echo 'export ANTHROPIC_API_KEY=your_api_key_here' >> ~/.bashrc
+   source ~/.bashrc
+   ```
+   
+   **For Windows Command Prompt:**
+   ```cmd
+   # For temporary use in current session
+   set ANTHROPIC_API_KEY=your_api_key_here
+   
+   # For persistent use
+   setx ANTHROPIC_API_KEY your_api_key_here
+   ```
+   
+   **For Windows PowerShell:**
+   ```powershell
+   # For temporary use in current session
+   $env:ANTHROPIC_API_KEY = "your_api_key_here"
+   
+   # For persistent use
+   [Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "your_api_key_here", "User")
    ```
 
 2. **Command Line Argument**: Provide the key directly when running WebCopilot:
@@ -98,19 +128,20 @@ Options:
 
 ### Configuration
 
-You can override default configurations by creating a `.webcopilot_config.yml` file in your project directory. Below are the available configuration options:
+You can override the default configurations by creating a `.webcopilot_config.yml` file in your project directory. Below are the available configuration options with their default values:
 
 ```yaml
 behavior:
-    headless: true # Run browser in headless mode
+    headless: false # Run browser in headless mode (false shows the browser UI)
     useChrome: false # Use system Chrome instead of bundled Chromium
+    keepAlive: false # Keep browser window open after script finishes executing
 viewport:
     width: 1024 # Browser viewport width
     height: 1024 # Browser viewport height
 network:
     block: # Array of URLs to block (e.g., analytics)
-        - ".googletagmanager.com/"
-        - ".google-analytics.com/"
+        - "*.googletagmanager.com/*"
+        - "*.google-analytics.com/*"
 retry:
     enabled: true # Enable retry mechanism
     maxRetries: 3 # Maximum number of retry attempts
@@ -134,8 +165,8 @@ Create a `.webcopilot_config.yml` file in your project directory with any of the
 
 ```yaml
 behavior:
-    headless: false
-    useChrome: true
+    headless: true # Run browser without GUI (headless mode)
+    useChrome: true # Use system Chrome browser instead of bundled Chromium
 ```
 
 This will run the browser in non-headless mode using system Chrome with a larger viewport.
